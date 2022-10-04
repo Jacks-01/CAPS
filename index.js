@@ -8,6 +8,9 @@ const log4js = require('log4js');
 const logger = log4js.getLogger();
 logger.level = "info";
 
+eventPool.on('PACKAGE', packageHandler);
+eventPool.on('DRIVER', driverHandler);
+eventPool.on('VENDOR', vendorHandler);
 
 setInterval(() => {
     logger.info('debug stuff')
