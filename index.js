@@ -8,14 +8,19 @@ const log4js = require('log4js');
 const logger = log4js.getLogger();
 logger.level = "info";
 
-eventPool.on('PICKUP READY', vendorHandler);
-eventPool.on('DRIVER PICKUP', driverHandler);
+eventPool.once('PICKUP READY', vendorHandler);
+eventPool.once('DRIVER PICKUP', driverHandler);
 // eventPool.on('PACKAGE', packageHandler);
 
-setInterval(() => {
-    eventPool.emit('PICKUP READY', vendorHandler);
-    console.log('------------------------- break --------------------------');
-}, 5000);
 
+eventPool.emit('PICKUP READY');
+
+// * For continous running
+// setInterval(() => {
+//     eventPool.emit('PICKUP READY', vendorHandler);
+// }, 5000);
+
+// eventPool.on('PICKUP READY', vendorHandler);
+// eventPool.on('DRIVER PICKUP', driverHandler);
 
 module.exports = logger;
