@@ -1,12 +1,12 @@
 'use strict';
 
 const eventPool = require('../eventPool');
-const logger = require('../index');
+const log4js = require('log4js');
+const logger = log4js.getLogger();
 
 
-module.exports = (orderInfo) => {
-    logger.info('Order Info Recieved by Driver:', orderInfo);
-    eventPool.emit('DRIVER PICKUP', () => {
-        logger.log('Driver has recieved the package, in transit now...');
-    })
+module.exports = (payload) => {
+    logger.info('Order Info Recieved by Driver:', payload.orderInfo);
+    eventPool.emit('DRIVER PICKUP', payload);
+
 };

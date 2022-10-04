@@ -15,12 +15,15 @@ const orderInfo = {
 };
 
 module.exports = () => {
-  setTimeout(() => {
+    setTimeout(() => {
         logger.log(`${orderInfo.store}: has a package ready for pickup!`);
-        eventPool.emit('PICKUP READY', (orderInfo) => {
-            logger.log('order info:', orderInfo)});
-        eventPool.on('DELIVERED', () => {
-            logger.log(`Thank you: ${orderInfo.name}`);
+        eventPool.emit('DRIVER PICKUP', { orderInfo });
+
+
+        eventPool.on('DELIVERED', (payload) => {
+            logger.log(`Thank you: ${payload.orderInfo.name}`);
         })
-    }, 1000);
+        return orderInfo;
+    }, 500)
+    return orderInfo
 };
