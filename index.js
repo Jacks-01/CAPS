@@ -1,7 +1,7 @@
 'use strict';
 
 const eventPool = require('./eventPool');
-// const packageHandler = require('./package/package');
+const packageHandler = require('./package/package');
 const vendorHandler = require('./vendor/vendor');
 const driverHandler = require('./driver/driver');
 const log4js = require('log4js');
@@ -10,7 +10,7 @@ logger.level = "info";
 
 eventPool.once('PICKUP READY', vendorHandler);
 eventPool.once('DRIVER PICKUP', driverHandler);
-// eventPool.on('PACKAGE', packageHandler);
+eventPool.once('PACKAGE', packageHandler);
 
 
 eventPool.emit('PICKUP READY');

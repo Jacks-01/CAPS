@@ -20,8 +20,8 @@ module.exports = () => {
         eventPool.emit('DRIVER PICKUP', { orderInfo });
 
 
-        eventPool.on('DELIVERED', (payload) => {
-            logger.log(`Thank you: ${payload.orderInfo.name}`);
+        eventPool.once('DELIVERED', (payload) => {
+            logger.log(`Thank you for your order ${payload.orderInfo.customer}!`);
         })
         return orderInfo;
     }, 500)

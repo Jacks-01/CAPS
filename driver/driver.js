@@ -7,6 +7,5 @@ const logger = log4js.getLogger();
 
 module.exports = (payload) => {
     logger.info('Order Info Recieved by Driver:', payload.orderInfo);
-    eventPool.emit('DRIVER PICKUP', payload);
-
+    eventPool.emit('PACKAGE', payload);
 };
