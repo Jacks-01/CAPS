@@ -6,12 +6,11 @@ const vendorHandler = require('./vendor/vendor');
 const driverHandler = require('./driver/driver');
 const log4js = require('log4js');
 const logger = log4js.getLogger();
-logger.level = "info";
+logger.level = 'info';
 
 eventPool.once('PICKUP READY', vendorHandler);
 eventPool.once('DRIVER PICKUP', driverHandler);
 eventPool.once('PACKAGE', packageHandler);
-
 
 eventPool.emit('PICKUP READY');
 

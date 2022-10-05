@@ -1,10 +1,14 @@
 'use strict';
 
-const eventPool = require('../eventPool');
 const Chance = require('chance');
 const chance = new Chance();
+
 const log4js = require('log4js');
 const logger = log4js.getLogger();
+
+const { io } = require('socket.io-client');
+const socket = io('http://localhost:3001');
+
 
 const orderInfo = {
     store: chance.company(),
@@ -27,3 +31,4 @@ module.exports = () => {
     }, 500)
     return orderInfo
 };
+

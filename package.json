@@ -19,7 +19,10 @@
   "homepage": "https://github.com/Jacks-01/CAPS#readme",
   "dependencies": {
     "chance": "^1.1.8",
+    "eslint": "^8.24.0",
     "log4js": "^6.7.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.2"
   }
 }
