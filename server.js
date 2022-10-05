@@ -9,6 +9,13 @@ const server = new Server(PORT);
 // create namespace
 const caps = server.of('/caps');
 
+caps.on('connection', (socket) => {
+  logger.log('Socket conencted to caps namespace', socket.id);
+  socket.on('JOIN', (room) => {
+    socket.join(room);
+  });
+});
+
 // connect server
 server.on('connection', (socket) => {
   logger.log('Socket connected to Event Server', socket.id);
