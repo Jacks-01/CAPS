@@ -23,7 +23,6 @@ caps.on('connection', (socket) => {
   });
 
   socket.on('IN TRANSIT', (payload) => {
-    logger.debug('Server');
-    socket.emit;
+    logger.log(`Package in transit: ${payload}`);
   });
 });
