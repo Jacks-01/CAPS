@@ -19,19 +19,17 @@ const orderInfo = {
 }
 
 // setInterval(() => {
+// }, 5000);
 
-
-
-    // }, 5000);
-    
-socket.emit('PICKUP READY', { orderInfo });
 socket.emit('JOIN', orderInfo.store);
 
-socket.on('PICKUP READY', payload => {
-    logger.info(`${payload.store}: has a package ready for pickup!`)
-})
+socket.emit('PICKUP READY', { orderInfo })
+// socket.on('DRIVER PICKUP', payload => {
+//     logger.info(`${payload.orderInfo.store}: has a package ready for pickup!`)
+//     socket.emit('DRIVER PICKUP', orderInfo)
+// });
+    
 
-socket.emit('DRIVER PICKUP', orderInfo);
 
 socket.on('DELIVERED', payload => {
     logger.log(`Thank you for your order ${payload.customer}!`)
