@@ -1,34 +1,38 @@
-'use strict';
+'use strict'
 
-const Chance = require('chance');
-const chance = new Chance();
+const Chance = require('chance')
+const chance = new Chance()
 
-const log4js = require('log4js');
-const logger = log4js.getLogger();
+const log4js = require('log4js')
+const logger = log4js.getLogger()
+logger.level = 'INFO'
 
-const { io } = require('socket.io-client');
-const socket = io('http://localhost:3001');
-
+const { io } = require('socket.io-client')
+const socket = io('http://localhost:3001/caps')
 
 const orderInfo = {
     store: chance.company(),
     orderId: chance.string(),
     customer: chance.name(),
     address: chance.address(),
-    item: chance.word(),
-};
+    item: chance.word()
+}
 
-module.exports = () => {
-    setTimeout(() => {
-        logger.log(`${orderInfo.store}: has a package ready for pickup!`);
-        eventPool.emit('DRIVER PICKUP', { orderInfo });
+// setInterval(() => {
 
 
-        eventPool.once('DELIVERED', (payload) => {
-            logger.log(`Thank you for your order ${payload.orderInfo.customer}!`);
-        })
-        return orderInfo;
-    }, 500)
-    return orderInfo
-};
 
+    // }, 5000);
+    
+socket.emit('PICKUP READY', { orderInfo });
+socket.emit('JOIN', orderInfo.store);
+
+socket.on('PICKUP READY', payload => {
+    logger.info(`${payload.store}: has a package ready for pickup!`)
+})
+
+socket.emit('DRIVER PICKUP', orderInfo);
+
+socket.on('DELIVERED', payload => {
+    logger.log(`Thank you for your order ${payload.customer}!`)
+})
