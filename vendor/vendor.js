@@ -18,19 +18,11 @@ const orderInfo = {
     item: chance.word()
 }
 
-// setInterval(() => {
-// }, 5000);
-
 socket.emit('JOIN', orderInfo.store);
-
-socket.emit('PICKUP READY', { orderInfo })
-// socket.on('DRIVER PICKUP', payload => {
-//     logger.info(`${payload.orderInfo.store}: has a package ready for pickup!`)
-//     socket.emit('DRIVER PICKUP', orderInfo)
-// });
-    
-
+setInterval(() => {
+    socket.emit('PICKUP READY', { orderInfo });
+}, 5000);
 
 socket.on('DELIVERED', payload => {
     logger.log(`Thank you for your order ${payload.customer}!`)
-})
+});

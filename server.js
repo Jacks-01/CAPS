@@ -16,9 +16,14 @@ caps.on('connection', (socket) => {
     logger.log(`${room} has joined the room`);
     socket.join(room);
   });
-});
 
-socket.on('PICKUP READY', (payload) => {
-  logger.debug('Server PICKUP READY Event ', payload);
-  socket.emit('DRIVER PICKUP', payload);
+  socket.on('PICKUP READY', (payload) => {
+    logger.debug('Server PICKUP READY Event ', payload);
+    socket.emit('DRIVER PICKUP', payload);
+  });
+
+  socket.on('IN TRANSIT', (payload) => {
+    logger.debug('Server');
+    socket.emit;
+  });
 });
