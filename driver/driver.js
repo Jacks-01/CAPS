@@ -1,10 +1,21 @@
 'use strict';
 
-const eventPool = require('../eventPool');
 const log4js = require('log4js');
 const logger = log4js.getLogger();
+logger.level = 'DEBUG';
 
-module.exports = (payload) => {
-  logger.info('Order Info Recieved by Driver:', payload.orderInfo);
-  eventPool.emit('PACKAGE', payload);
-};
+const io = require('socket.io-client');
+const socket = io('http://localhost:3001');
+
+socket.on('DRIVER PICKUP', (payload) => {
+  logger.debug(`Driver has picked up package`);
+  socket.emit('IN TRANSIT', payload);
+
+  setTimeout(() => {
+    setTimeout(() => {
+      logger.log('in transit...');
+    }, 500);
+    logger.log('Package has been delivered.');
+    socket.emit('DELIVERED', payload);
+  }, 5000);
+});
